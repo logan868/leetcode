@@ -1,0 +1,37 @@
+206. Reverse Linked List (Easy)
+
+Reverse a singly linked list.
+
+Example:
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+基本思想：有三个节点，一个指针pre指向前一个节点，一个指针cur指向当前节点，一个指针nxt指向下一个节点，
+当cur指向最后一个节点的时候 - - > nxt指向了NULL - - > 最后一个节点原本指向NULL改为指向pre - - > pre指向最后一个节点 - - > cur = nxt指向NULL
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode *pre = NULL;
+        ListNode *cur = head;
+        ListNode *nxt = NULL;
+        while(cur)
+        {
+            nxt = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;//注意最后一步cur nxt都指向为空，pre指向原节点的最后一个节点
+   
+    }
+};
